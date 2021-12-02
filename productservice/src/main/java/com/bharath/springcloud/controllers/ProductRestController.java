@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/productapi")
 public class ProductRestController {
@@ -31,6 +33,13 @@ public class ProductRestController {
                 Coupon.class);
         product.setPrice(product.getPrice().subtract(coupon.getDiscount()));
         return repo.save(product);
+        /*Product prod = new Product();
+        prod.setId(5L);
+        prod.setPrice(BigDecimal.valueOf(1.1));
+        prod.setCouponCode("MyCoup");
+        prod.setName("MacX");
+        prod.setDescription("TestProduct");
+        return prod;*/
     }
 
     public Product setErrorResponse(Product product) {

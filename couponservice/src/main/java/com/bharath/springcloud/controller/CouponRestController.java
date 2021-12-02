@@ -1,11 +1,13 @@
 package com.bharath.springcloud.controller;
 
 import com.bharath.springcloud.model.Coupon;
+//import com.bharath.springcloud.repos.CouponRepo;
 import com.bharath.springcloud.repos.CouponRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/couponapi")
@@ -21,8 +23,7 @@ public class CouponRestController {
 
     @RequestMapping(value = "/coupons/{code}", method = RequestMethod.GET)
     public Coupon getCoupon(@PathVariable("code") String code) {
-        return repo.findByCode(code);
-
+       return repo.findByCode(code);
     }
 
 //    @RequestMapping(value = "/coupons/expDate/**", method = RequestMethod.GET)
@@ -33,8 +34,7 @@ public class CouponRestController {
 
     @RequestMapping(value = "/coupons/expDate", method = RequestMethod.GET)
     public Coupon getCouponByExpDate(@RequestParam("expDate") String expDate) {
-        Coupon ret = repo.findByExpDate(expDate);
-        return ret;
+        return repo.findByExpDate(expDate);
     }
 
 //    @RequestMapping(value = "/coupons/expDate/{expDate}", method = RequestMethod.GET)
