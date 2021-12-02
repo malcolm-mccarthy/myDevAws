@@ -1,0 +1,8 @@
+docker run -d -p 7666:3306 --name=docker-flightdb --env="MYSQL_ROOT_PASSWORD=test1234" --env="MYSQL_DATABASE=reservation" mysql
+docker exec -i docker-flightdb mysql -uroot -ptest1234 reservation<flightdb.sql
+docker exec -it docker-flightdb bash
+docker build -f Dockerfile -t flightservice .
+docker network create flightnet
+docker service update --network-add= SERVICE
+docker network connect flightnet docker-flightdb
+docker run -t --name=flightservice -p 19092:9092 --network=flightnet flightservice
