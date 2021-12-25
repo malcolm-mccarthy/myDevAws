@@ -1,0 +1,30 @@
+version: "3.3"
+services:
+  web:
+    image: httpd
+    container_name: mywebserver
+    networks:
+      - webnetwork
+    ports:
+      - "8080:80"
+    volumes:
+      - myvol:/data
+      #- type: bind
+      #  source: data
+      #  target: data
+  datastore:
+    image: redis
+    container_name: myredis
+    ports:
+      - "16379:6379"
+networks:
+  webnetwork:
+    driver: bridge
+  dbnetwork:
+    driver: bridge
+  #default:
+  #   external:
+  #      name:
+volumes:
+  myvol:
+
