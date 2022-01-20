@@ -28,11 +28,13 @@ public class ProductRestController {
 
     @RequestMapping(value = "/products", method = RequestMethod.POST)
     public Product create(@RequestBody Product product) {
-        Coupon coupon = restTemplate.getForObject(
+       Coupon coupon = restTemplate.getForObject(
                 couponServiceUrl + product.getCouponCode(),
                 Coupon.class);
         product.setPrice(product.getPrice().subtract(coupon.getDiscount()));
         return repo.save(product);
+
+       // return null;
         /*Product prod = new Product();
         prod.setId(5L);
         prod.setPrice(BigDecimal.valueOf(1.1));

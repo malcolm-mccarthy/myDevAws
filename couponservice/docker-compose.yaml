@@ -2,7 +2,7 @@ version: "3.9"
 services:
   productservice:
     container_name: productservice
-    image: productservice
+    image: drmsm/productservice
     restart: on-failure
     ports:
       - "19090:9090"
@@ -13,27 +13,31 @@ services:
       - docker-mysql
   couponservice:
     container_name: couponservice
-    image: couponservice
+    image: drmsm/couponservice
     restart: on-failure
     ports:
       - "19091:9091"
+      - "5005:5005"
     environment:
       WAIT_HOSTS: mysql:3306
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n"
     depends_on:
       - docker-mysql
-  simpleservice:
-    container_name: simpleservice
-    image: simpleservice
-    ports:
-      - "19093:9093"
+  #simpleservice:
+  #  container_name: simpleservice
+  #  image: simpleservice
+  #  ports:
+  #    - "19093:9093"
   docker-mysql:
     container_name: docker-mysql
-    image: mysql/mysql-server
+    image: mariadb:10.3
     restart: always
     environment:
       MYSQL_DATABASE: mydb
       MYSQL_ROOT_PASSWORD: test1234
       MYSQL_ROOT_HOST: '%'
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: abc123
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
     ports:

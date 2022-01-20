@@ -8,8 +8,8 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class ProductServiceApplication {
 
-    @Bean
-    public RestTemplate restTemplate() {
+   @Bean
+   public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 

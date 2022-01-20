@@ -1,0 +1,17 @@
+customerName: Malcolm
+orderID: 123
+date: 12/12/2020
+shipped: false
+moreData: null
+#list
+products:
+  - name: macBook
+    price: 1500
+    quantity: 3
+  - name: Iphone
+  - name: Desktop
+#map
+address:
+  street: SpringField
+  city: Austin
+
